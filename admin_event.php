@@ -1,3 +1,22 @@
+<?php
+    $connect = mysqli_connect('localhost','root','','eproject');
+    if(isset($_REQUEST['save'])) {
+        $img_event = $_REQUEST['img_event'];
+        $wrapper_highlight = $_REQUEST['wrapper_highlight'];
+        $title_event1 = $_REQUEST['title_event1'];
+        $title_event2 = $_REQUEST['title_event2'];
+        $content_event1 = $_REQUEST['content_event1'];
+        $content_event2 = $_REQUEST['content_event2'];
+        $price = $_REQUEST['price'];
+
+        $save_value= "INSERT INTO post_event(IMG_EVENT, WRAPPER_HIGHLIGHT, TITLE_EVENT1, TITLE_EVENT2, CONTENT_EVENT1, CONTENT_EVENT2, PRICE) VALUES ('".$img_event."','".$wrapper_highlight."','".$title_event1."','".$title_event2."','".$content_event1."','".$content_event2."', '".$price."')";
+        // echo($save_value);
+        mysqli_query($connect, $save_value);
+     
+
+    }
+    mysqli_close($connect);
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -7,13 +26,19 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   <meta name="description" content="">
   <meta name="author" content="">
-  <title>Admin - Trang Quản Trị</title>
+  <title>Trang Quản Trị</title>
   <!-- Bootstrap core CSS-->
   <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
   <!-- Custom fonts for this template-->
   <link href="vendor/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
   <!-- Custom styles for this template-->
   <link href="css/sb-admin.css" rel="stylesheet">
+  <style type="text/css">
+            label {
+                font-size: 16px; 
+                color: #f73679
+            }
+        </style>
 </head>
 
 <body class="fixed-nav sticky-footer bg-dark" id="page-top">
@@ -90,6 +115,58 @@
       <hr>
     </div>
     <!-- /.container-fluid-->
+    <div id="global">
+            <div class="container-fluid">
+                <div class="panel panel-default">
+                   
+                    <div class="panel-body">
+
+                        <form action="admin_event.php" method="post">
+                            
+                            <div>
+                                <label>Image</label>
+                                <input required type="text" name="img_event" class="form-control" placeholder="Enter Link Image">
+                            </div><br>
+
+                            <div>
+                                <label>Wrapper HighLight</label>
+                                <input required type="text" name="wrapper_highlight" class="form-control" placeholder="Enter Wrapper Highlight">
+                            </div><br>
+
+                            <div>
+                                <label>Title 1</label>
+                                <input required type="text" name="title_event1" class="form-control" placeholder="Enter title 1">
+                            </div><br>
+
+                            <div>
+                                <label>Title 2</label>
+                                <input required type="text" name="title_event2" class="form-control" placeholder="Enter title 2">
+                            </div><br>
+
+                            <div>
+                                <label>Content 1</label>
+                                <input type="text" required class="form-control" name="content_event1">
+                            </div><br>
+
+                            <div>
+                                <label>Content 2</label>
+                                <textarea required class="form-control" name="content_event2"></textarea>
+                            </div><br>
+                            
+                            <div>
+                                <label>Price</label>
+                                <input required type="number" class="form-control" name="price">
+                            </div><br>
+                            <div class="form-group text-right" style="margin-top:20px">
+                            
+                                <button type="submit" name="save" id="save" class="btn btn-primary">Save</button>
+                            </div>
+                        </form>
+
+                    </div>
+                </div>
+            </div>
+        </div>
     <!-- /.content-wrapper-->
     <footer class="sticky-footer">
       <div class="container">
